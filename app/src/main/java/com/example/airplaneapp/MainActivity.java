@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             output.setText("Blackbird");
         });
         airbus.setOnClickListener(v -> {
-            output.setText("Airbus 320");
+            output.setText("Airbus A320");
         });
 
 

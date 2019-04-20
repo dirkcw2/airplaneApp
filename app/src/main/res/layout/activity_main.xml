@@ -8,38 +8,39 @@
 
     <ImageButton
         android:id="@+id/boeingImage"
-        android:layout_width="404dp"
-        android:layout_height="186dp"
+        android:layout_width="409dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="554dp"
         android:contentDescription="TODO"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/download" />
+        app:srcCompat="@drawable/boeing" />
 
     <ImageButton
         android:id="@+id/airBus"
-        android:layout_width="wrap_content"
-        android:layout_height="158dp"
+        android:layout_width="408dp"
+        android:layout_height="136dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boeingImage"
         app:srcCompat="@drawable/a320" />
 
     <ImageButton
         android:id="@+id/blackBird"
-        android:layout_width="402dp"
-        android:layout_height="wrap_content"
+        android:layout_width="407dp"
+        android:layout_height="146dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/airBus"
-        app:srcCompat="@drawable/blackbird" />
+        app:srcCompat="@drawable/blackbird2" />
 
     <TextView
         android:id="@+id/inputWindow"
@@ -47,14 +48,15 @@
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="148dp"
         android:text="TextView"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBird"
         tools:text="Enter Mass(kg)" />
 
     <TextView
@@ -63,12 +65,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputWindow" />
 
 </android.support.constraint.ConstraintLayout>
