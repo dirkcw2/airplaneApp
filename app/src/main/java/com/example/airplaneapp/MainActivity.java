@@ -18,8 +18,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final TextView output = findViewById(R.id.outputWindow);
         final ImageButton boeing = findViewById(R.id.boeingImage);
+        final ImageButton blackbird = findViewById(R.id.blackBird);
+        final ImageButton airbus = findViewById(R.id.airBus);
         boeing.setOnClickListener(v -> {
             output.setText("Boeing 777");
         });
+        blackbird.setOnClickListener(v -> {
+            output.setText("Blackbird");
+        });
+        airbus.setOnClickListener(v -> {
+            output.setText("Airbus 320");
+        });
+
+
     }
 }
