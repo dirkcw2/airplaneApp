@@ -4,6 +4,7 @@ public class boeing extends AirPlane {
     public boeing() {
         super();
         name = "Boeing 777";
+        wingArea =
 
     }
 

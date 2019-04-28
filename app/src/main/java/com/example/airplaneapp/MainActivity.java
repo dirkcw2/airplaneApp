@@ -2,8 +2,10 @@ package com.example.airplaneapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.LocationListener;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -41,7 +43,8 @@ import android.widget.ToggleButton;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_FINE_LOCATION = 88;
     private boolean canAccessFineLocation = false;
-
+    double currLong;
+    double currLat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,29 +54,66 @@ public class MainActivity extends AppCompatActivity {
         final ImageButton boeing = findViewById(R.id.boeingImage);
         final ImageButton blackbird = findViewById(R.id.blackBird);
         final ImageButton airbus = findViewById(R.id.airBus);
+
         canAccessFineLocation =
                 checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         if (!canAccessFineLocation) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
+        }
 
 
-        //currLat, currLong;
+        // Handle permissions!!!!!
+
+
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double currLong = location.getLongitude();
-        double currLat = location.getLatitude();
+        currLong = location.getLongitude();
+        currLat = location.getLatitude();
+
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                currLong = location.getLongitude();
+                currLat = location.getLatitude();
+            }
+
+            @Override
+            public void onStatusChanged(String provider,
+                                        int status,
+                                        Bundle extras) {
+                Log.d("tag", "changed");
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+                Log.d("tag", "changed");
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Log.d("tag", "changed");
+            }
+
+        };
+
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+
+
+        String url = "https://api.darksky.net/forecast/6592c435eba5f3dcc7d9f16a18aea781/" + Double.toString(currLat) + "," + Double.toString(currLong);
 
         //
 
         boeing.setOnClickListener(v -> {
+            startAPIcall(url);
             output.setText("Boeing 777");
-            //
         });
         blackbird.setOnClickListener(v -> {
+            startAPIcall(url);
             output.setText("Blackbird");
         });
         airbus.setOnClickListener(v -> {
+            startAPIcall(url);
             output.setText("Airbus A320");
         });
     }

@@ -9,10 +9,13 @@ public abstract class AirPlane {
     public double CL_Max;
     public double CL_G;
     public double CD0;
-    public double e;
-    public double CR;
+    public double e = 2.78;
+    public double CR = 0.020;
     public double carryWeight;
-    public double Max_Weight;
+    public double maxWeight;
+    public double emptyWeight;
+    public double g = 9.81;
+
     public AirPlane() {
         carryWeight = 0;
     }
