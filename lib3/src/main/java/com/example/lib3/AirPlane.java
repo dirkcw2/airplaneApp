@@ -15,6 +15,7 @@ public abstract class AirPlane {
     public double maxWeight;
     public double emptyWeight;
     public double g = 9.81;
+    public double r = 8.314;
 
     public AirPlane() {
         carryWeight = 0;
