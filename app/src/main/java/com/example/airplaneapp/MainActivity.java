@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lib3.AirPlane;
 import com.example.lib3.airbus;
 import com.example.lib3.blackbird;
@@ -38,6 +39,8 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.ToggleButton;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageButton boeing = findViewById(R.id.boeingImage);
         final ImageButton blackbird = findViewById(R.id.blackBird);
         final ImageButton airbus = findViewById(R.id.airBus);
+        final TextView input = findViewById(R.id.textView);
 
         canAccessFineLocation =
                 checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
@@ -62,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        // Handle permissions!!!!!
 
 
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -103,10 +106,13 @@ public class MainActivity extends AppCompatActivity {
         String url = "https://api.darksky.net/forecast/6592c435eba5f3dcc7d9f16a18aea781/" + Double.toString(currLat) + "," + Double.toString(currLong);
 
         //
+        startAPIcall(url);
 
         boeing.setOnClickListener(v -> {
-            startAPIcall(url);
-            output.setText("Boeing 777");
+            double mass = getInput();
+            boeing boeing777 = new boeing(outputData, mass);
+            String distance = boeing777.trackDistance(boeing777.takeoffVel());
+            output.setText(distance);
         });
         blackbird.setOnClickListener(v -> {
             startAPIcall(url);
@@ -118,7 +124,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void startAPIcall(String url) {
+    public double getInput() {
+        final TextView input = findViewById(R.id.textView);
+        double mass = new Double(input.getText().toString());
+        return mass;
+    }
+
+    public double[] outputData = new double[2];
+    //System.out.println(output[1]);
+
+    public void startAPIcall(String url) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -127,7 +142,15 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         // Display the first 500 characters of the response string.
+                        JsonParser parser = new JsonParser();
+                        JsonObject result = parser.parse(response).getAsJsonObject();
+                        double pressure = result.getAsJsonObject("currently").get("pressure").getAsDouble();
+                        outputData[0] = pressure;
+                        double temperature = result.getAsJsonObject("currently").get("temperature").getAsDouble();
+                        outputData[1] = temperature;
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -141,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     protected void processData(final String jsonResult) {
-        String result = "https://api.darksky.net/forecast/6592c435eba5f3dcc7d9f16a18aea781/42.3601,-71.0589";
+
 
     }
 }
