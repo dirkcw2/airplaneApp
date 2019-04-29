@@ -105,10 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
         String url = "https://api.darksky.net/forecast/6592c435eba5f3dcc7d9f16a18aea781/" + Double.toString(currLat) + "," + Double.toString(currLong);
 
-        //
-        startAPIcall(url);
+
+        //startAPIcall(url);
 
         boeing.setOnClickListener(v -> {
+            startAPIcall(url);
             double mass = getInput();
             boeing boeing777 = new boeing(outputData, mass);
             String distance = boeing777.trackDistance(boeing777.takeoffVel());
@@ -116,11 +117,17 @@ public class MainActivity extends AppCompatActivity {
         });
         blackbird.setOnClickListener(v -> {
             startAPIcall(url);
-            output.setText("Blackbird");
+            double mass = getInput();
+            blackbird sr71blackbird = new blackbird(outputData, mass);
+            String distance = sr71blackbird.trackDistance(sr71blackbird.takeoffVel());
+            output.setText(distance);
         });
         airbus.setOnClickListener(v -> {
             startAPIcall(url);
-            output.setText("Airbus A320");
+            double mass = getInput();
+            airbus a320 = new airbus(outputData, mass);
+            String distance = a320.trackDistance(a320.takeoffVel());
+            output.setText(distance);
         });
     }
 
