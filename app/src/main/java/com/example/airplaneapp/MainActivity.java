@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        currLong = location.getLongitude();
-        currLat = location.getLatitude();
+        Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        currLong = myLocation.getLongitude();
+        currLat = myLocation.getLatitude();
 
         LocationListener locationListener = new LocationListener() {
             @Override
@@ -167,11 +167,5 @@ public class MainActivity extends AppCompatActivity {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-    }
-
-
-    protected void processData(final String jsonResult) {
-
-
     }
 }
